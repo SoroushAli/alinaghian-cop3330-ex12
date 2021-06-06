@@ -3,6 +3,9 @@
  *  Copyright 2021 Soroush Alinaghian
  */
 package base;
+
+import java.util.Scanner;
+
 /*
 Create a program that computes simple interest. Prompt for the principal amount, the rate as a percentage, and the time, and display the amount accrued (principal + interest).
 
@@ -28,7 +31,34 @@ Alter the program to use a function called calculateSimpleInterest that takes in
 In addition to printing out the final amount, print out the amount at the end of each year.
  */
 public class App {
-    public static void main(String[] args) {
+    static Scanner in = new Scanner(System.in);
 
+    public static void main(String[] args) {
+        int principalAmount = readPrincipalAmount();
+        float rate = readRate();
+        int years = readYears();
+        endOfInvestment(principalAmount, rate, years);
+    }
+
+    private static void endOfInvestment(int principal, float rate, int years) {
+        //A = P(1 + rt)
+        float newRate = rate/100;
+        int endAmount = (int) ( principal * (1 + newRate * years));
+        System.out.print(String.format("After %d years at %.1f%%, the investment will be worth $%d.", years, rate, endAmount));
+    }
+
+    private static int readPrincipalAmount() {
+        System.out.print("Enter the principal: ");
+        return in.nextInt();
+    }
+
+    private static int readYears() {
+        System.out.print("What is the number of years? ");
+        return in.nextInt();
+    }
+
+    private static float readRate() {
+        System.out.print("What is the rate? ");
+        return in.nextFloat();
     }
 }
